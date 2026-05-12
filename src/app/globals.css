@@ -319,7 +319,7 @@ image-slot {
 }
 .art-frame {
   position: relative;
-  background: var(--surface-1);
+  background: var(--bg-deep);
   border: 1px solid var(--gold-faint);
   overflow: hidden;
 }

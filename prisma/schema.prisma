@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(USER)
+  votes        Vote[]
+  createdAt    DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Phase {
+  id          String      @id @default(uuid())
+  order       Int         @unique
+  name        String
+  title       String
+  eyebrow     String
+  lore        String     
+  status      PhaseStatus @default(PENDING)
+  closesAt    DateTime?
+  options     Option[]
+  votes       Vote[]
+}
+
+enum PhaseStatus {
+  PENDING
+  ACTIVE
+  SEALED
+}
+
+model Option {
+  id       String @id @default(uuid())
+  phaseId  String
+  slotId   String
+  title    String
+  kind     String
+  lore     String
+  flavor   String
+  order    Int    @default(0)
+
+  phase    Phase  @relation(fields: [phaseId], references: [id])
+  votes    Vote[]
+}
+
+model Vote {
+  id       String @id @default(uuid())
+  userId   String
+  phaseId  String
+  optionId String
+  
+  user     User   @relation(fields: [userId], references: [id])
+  phase    Phase  @relation(fields: [phaseId], references: [id])
+  option   Option @relation(fields: [optionId], references: [id])
+
+  @@unique([userId, phaseId])
+}
+
+model Setting {
+  key   String @id
+  value String
+}
+
+model ImageSlot {
+  id  String @id
+  url String
+}

@@ -457,7 +457,7 @@ image-slot {
 
 .vote-art {
   flex: 0 0 auto;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 16 / 9;
   width: 100%;
   position: relative;
   min-height: 0;

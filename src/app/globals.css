@@ -564,6 +564,15 @@ image-slot {
   .shell { padding: 36px 20px 80px; }
   .h1 { font-size: 38px; }
   .stat-num { font-size: 28px; }
+
+  .vote-meta .lore {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    display: block;
+    overflow-y: auto;
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  }
 }
 
 /* ── Dramatic countdown ───────────────────────────── */

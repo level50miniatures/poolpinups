@@ -376,6 +376,38 @@ image-slot {
   display: block;
   font-size: 8px !important;
 }
+.app-nav .nav-drawer {
+  display: contents;
+}
+.app-nav .nav-lang {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.app-nav .nav-burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--gold-faint);
+  cursor: pointer;
+  position: relative;
+}
+.app-nav .nav-burger span {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  height: 1px;
+  background: var(--gold-bright);
+  transition: transform 220ms, opacity 180ms, top 220ms;
+}
+.app-nav .nav-burger span:nth-child(1) { top: 13px; }
+.app-nav .nav-burger span:nth-child(2) { top: 19px; }
+.app-nav .nav-burger span:nth-child(3) { top: 25px; }
+.app-nav.open .nav-burger span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+.app-nav.open .nav-burger span:nth-child(2) { opacity: 0; }
+.app-nav.open .nav-burger span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
 .app-nav .tabs {
   display: flex;
   gap: 4px;
@@ -559,8 +591,48 @@ image-slot {
 
 @media (max-width: 880px) {
   .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
-  .app-nav { padding: 14px 20px; flex-wrap: wrap; gap: 10px; }
-  .app-nav .tabs { width: 100%; overflow-x: auto; padding-bottom: 4px; }
+  .app-nav { padding: 14px 20px; gap: 10px; }
+  .app-nav .nav-burger { display: block; }
+  .app-nav .nav-drawer {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 28px 24px 40px;
+    background: rgba(5, 3, 2, 0.97);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--gold-faint);
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 240ms, opacity 200ms;
+    overflow-y: auto;
+  }
+  .app-nav.open .nav-drawer {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .app-nav .nav-drawer .tabs {
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+  .app-nav .nav-drawer .tab {
+    width: 100%;
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 12px;
+  }
+  .app-nav .nav-lang {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--gold-faint);
+  }
   .shell { padding: 36px 20px 80px; }
   .h1 { font-size: 38px; }
   .stat-num { font-size: 28px; }

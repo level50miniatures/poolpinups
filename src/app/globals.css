@@ -674,6 +674,18 @@ image-slot {
     mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   }
+
+  /* Voting cards: shrink all fonts 50% so text fits in 2-column layout */
+  .vote-card .vote-meta { padding: 12px 12px 14px; }
+  .vote-card .vote-meta .eyebrow { font-size: 4.5px !important; margin-bottom: 3px !important; }
+  .vote-card .vote-meta h3 { font-size: 8.8px; margin: 0 0 3px; letter-spacing: 0.06em; }
+  .vote-card .vote-meta .lore { font-size: 6.2px; margin: 0 0 7px; line-height: 1.4; }
+  .vote-card .vote-meta .mono { font-size: 5.5px; }
+  .vote-card .vote-back .eyebrow { font-size: 5.5px; margin-bottom: 7px !important; }
+  .vote-card .vote-back h3 { font-size: 13px !important; margin: 0 0 5px !important; }
+  .vote-card .vote-back .lore { font-size: 6.5px !important; margin: 0 0 12px !important; }
+  .vote-card .vote-back .mono { font-size: 4.5px !important; margin-top: 8px !important; }
+  .vote-card .voted-badge { font-size: 7px; padding: 2px 5px; }
 }
 
 /* ── Dramatic countdown ───────────────────────────── */

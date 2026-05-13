@@ -189,6 +189,7 @@ const SectionHead = ({ eyebrow, title, lore, align = "center" }) => (
 // Top-level prototype nav
 const AppNav = ({ screen, onNav, lang, onLang }) => {
   const tr = window.t || ((s) => s);
+  const [open, setOpen] = React.useState(false);
   const tabs = [
     { id: "landing", label: tr("Landing") },
     { id: "login", label: tr("Login") },
@@ -196,27 +197,46 @@ const AppNav = ({ screen, onNav, lang, onLang }) => {
     { id: "voting", label: tr("Voting") },
     { id: "results", label: tr("Results") },
   ];
+
+  React.useEffect(() => { setOpen(false); }, [screen]);
+  React.useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  const handleNav = (id) => { onNav(id); setOpen(false); };
+
   return (
-    <nav className="app-nav">
+    <nav className={`app-nav ${open ? "open" : ""}`}>
       <div className="brand">
         <div className="brand-logo" title={tr("Drop your company logo here")}>
           <image-slot id="brand-logo" shape="rect" placeholder="LOGO"></image-slot>
         </div>
         <span>Pool Pinups</span>
       </div>
-      <div className="tabs">
-        {tabs.map(t => (
-          <button
-            key={t.id}
-            className={`tab ${screen === t.id ? "active" : ""}`}
-            onClick={() => onNav(t.id)}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
-      <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-        {window.LangSwitcher && <window.LangSwitcher lang={lang} onChange={onLang} />}
+      <button
+        className="nav-burger"
+        aria-label={tr("Menu")}
+        aria-expanded={open}
+        onClick={() => setOpen(o => !o)}
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <div className="nav-drawer">
+        <div className="tabs">
+          {tabs.map(t => (
+            <button
+              key={t.id}
+              className={`tab ${screen === t.id ? "active" : ""}`}
+              onClick={() => handleNav(t.id)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+        <div className="nav-lang">
+          {window.LangSwitcher && <window.LangSwitcher lang={lang} onChange={onLang} />}
+        </div>
       </div>
     </nav>
   );

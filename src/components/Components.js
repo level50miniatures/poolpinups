@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { createPortal } from "react-dom";
 import { t, LangSwitcher } from "../lib/i18n";
 import { useImageUrl } from "../lib/imageUrlContext";
 
@@ -196,6 +197,7 @@ export const SectionHead = ({ eyebrow, title, lore, align = "center" }) => (
 
 export const AppNav = ({ screen, onNav, lang, onLang }) => {
   const [open, setOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const tabs = [
     { id: "landing", label: t("Landing") },
     { id: "login", label: t("Login") },
@@ -204,6 +206,7 @@ export const AppNav = ({ screen, onNav, lang, onLang }) => {
     { id: "results", label: t("Results") },
   ];
 
+  React.useEffect(() => { setMounted(true); }, []);
   React.useEffect(() => { setOpen(false); }, [screen]);
   React.useEffect(() => {
     if (typeof document === "undefined") return;
@@ -213,39 +216,51 @@ export const AppNav = ({ screen, onNav, lang, onLang }) => {
 
   const handleNav = (id) => { onNav(id); setOpen(false); };
 
+  const navContent = (
+    <>
+      <div className="tabs">
+        {tabs.map(tb => (
+          <button
+            key={tb.id}
+            className={`tab ${screen === tb.id ? "active" : ""}`}
+            onClick={() => handleNav(tb.id)}
+          >
+            {tb.label}
+          </button>
+        ))}
+      </div>
+      <div className="nav-lang">
+        <LangSwitcher lang={lang} onChange={onLang} />
+      </div>
+    </>
+  );
+
   return (
-    <nav className={`app-nav ${open ? "open" : ""}`}>
-      <div className="brand">
-        <div className="brand-logo" title={t("Drop your company logo here")}>
-          <ImageSlot id="brand-logo" shape="rect" placeholder="LOGO" />
+    <>
+      <nav className={`app-nav ${open ? "open" : ""}`}>
+        <div className="brand">
+          <div className="brand-logo" title={t("Drop your company logo here")}>
+            <ImageSlot id="brand-logo" shape="rect" placeholder="LOGO" />
+          </div>
+          <span>Pool Pinups</span>
         </div>
-        <span>Pool Pinups</span>
-      </div>
-      <button
-        type="button"
-        className="nav-burger"
-        aria-label={t("Menu")}
-        aria-expanded={open}
-        onClick={() => setOpen(o => !o)}
-      >
-        <span></span><span></span><span></span>
-      </button>
-      <div className="nav-drawer">
-        <div className="tabs">
-          {tabs.map(tb => (
-            <button
-              key={tb.id}
-              className={`tab ${screen === tb.id ? "active" : ""}`}
-              onClick={() => handleNav(tb.id)}
-            >
-              {tb.label}
-            </button>
-          ))}
-        </div>
-        <div className="nav-lang">
-          <LangSwitcher lang={lang} onChange={onLang} />
-        </div>
-      </div>
-    </nav>
+        <div className="nav-inline">{navContent}</div>
+        <button
+          type="button"
+          className="nav-burger"
+          aria-label={t("Menu")}
+          aria-expanded={open}
+          onClick={() => setOpen(o => !o)}
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+      {mounted && createPortal(
+        <div className={`nav-drawer ${open ? "open" : ""}`} aria-hidden={!open}>
+          {navContent}
+        </div>,
+        document.body
+      )}
+    </>
   );
 };

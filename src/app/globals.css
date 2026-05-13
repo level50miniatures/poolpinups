@@ -376,13 +376,23 @@ image-slot {
   display: block;
   font-size: 8px !important;
 }
-.app-nav .nav-drawer {
-  display: contents;
+.app-nav .nav-inline {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
 }
-.app-nav .nav-lang {
+.app-nav .nav-inline .tabs {
+  display: flex;
+  gap: 4px;
+}
+.app-nav .nav-inline .nav-lang {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+.nav-drawer {
+  display: none;
 }
 .app-nav .nav-burger {
   display: none;
@@ -592,43 +602,61 @@ image-slot {
 @media (max-width: 880px) {
   .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
   .app-nav { padding: 14px 20px; gap: 10px; }
+  .app-nav .nav-inline { display: none; }
   .app-nav .nav-burger { display: block; }
-  .app-nav .nav-drawer {
+  .nav-drawer {
     display: flex;
     flex-direction: column;
     gap: 18px;
     position: fixed;
-    top: 68px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 28px 24px 40px;
+    padding: 84px 24px 40px;
     background: rgba(5, 3, 2, 0.97);
     backdrop-filter: blur(14px);
-    border-top: 1px solid var(--gold-faint);
+    z-index: 9999;
     transform: translateY(-12px);
     opacity: 0;
     pointer-events: none;
     transition: transform 240ms, opacity 200ms;
     overflow-y: auto;
   }
-  .app-nav.open .nav-drawer {
+  .nav-drawer.open {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
   }
-  .app-nav .nav-drawer .tabs {
+  .nav-drawer .tabs {
+    display: flex;
     flex-direction: column;
     gap: 6px;
     width: 100%;
   }
-  .app-nav .nav-drawer .tab {
+  .nav-drawer .tab {
     width: 100%;
     text-align: left;
     padding: 14px 16px;
     font-size: 12px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 200ms;
   }
-  .app-nav .nav-lang {
+  .nav-drawer .tab.active {
+    color: var(--gold-bright);
+    border-color: var(--gold-faint);
+    background: rgba(20, 16, 12, 0.6);
+  }
+  .nav-drawer .nav-lang {
+    display: flex;
+    gap: 10px;
+    align-items: center;
     margin-top: auto;
     padding-top: 18px;
     border-top: 1px solid var(--gold-faint);

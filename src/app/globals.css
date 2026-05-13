@@ -688,6 +688,13 @@ image-slot {
   .vote-card .vote-back .lore { font-size: 6px !important; margin: 0 0 8px !important; max-width: none !important; line-height: 1.35 !important; }
   .vote-card .vote-back .mono { font-size: 4.5px !important; margin-top: 6px !important; }
   .vote-card .vote-back .frame > div:has(> .btn) { margin-top: 6px !important; }
+  .vote-card .vote-back .btn {
+    padding: 6px 14px !important;
+    font-size: 8px !important;
+    letter-spacing: 0.18em !important;
+    gap: 6px !important;
+    white-space: nowrap;
+  }
   .vote-card .voted-badge { font-size: 7px; padding: 2px 5px; }
 }
 

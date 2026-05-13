@@ -764,10 +764,33 @@ image-slot {
 }
 .hero .hero-side.right { text-align: right; align-items: flex-end; }
 
+/* Title overlay: hidden on desktop, only shown on mobile inside the tarot frame */
+.hero .hero-title-overlay { display: none; }
+
 @media (max-width: 1080px) {
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero .hero-side.right { text-align: left; align-items: flex-start; }
   .hero .hero-tarot { max-width: 420px; order: -1; }
+}
+
+@media (max-width: 880px) {
+  .hero .hero-title-desktop { display: none; }
+  .hero .tarot-frame { position: relative; }
+  .hero .hero-title-overlay {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 92%;
+    margin: 0;
+    text-align: center;
+    z-index: 3;
+    pointer-events: none;
+    text-shadow:
+      0 2px 16px rgba(0, 0, 0, 0.9),
+      0 0 30px rgba(0, 0, 0, 0.7);
+  }
 }
 
 /* ── Result reveal ─────────────────────────────────── */

@@ -18,6 +18,17 @@ export const LandingScreen = ({ onNav, ksUrl, phases = [], settings = {} }) => {
   const heroSecondaryBtn = settings.heroSecondaryBtn || "Join the Vote";
   const ctaButton = settings.ctaButton || "Cast Your Voice";
 
+  const heroTitleNode = (
+    <>
+      {heroTitleLines.map((line, i) => (
+        <React.Fragment key={i}>
+          {i === heroTitleLines.length - 1 ? <span className="gold">{line}</span> : line}
+          {i < heroTitleLines.length - 1 && <br />}
+        </React.Fragment>
+      ))}
+    </>
+  );
+
   const totalVotes = phases.reduce((acc, p) => acc + (p.options || []).reduce((s, o) => s + (o.tally || 0), 0), 0);
   const sealedCount = phases.filter(p => p.status === "SEALED").length;
   const totalPhases = phases.length;
@@ -35,13 +46,8 @@ export const LandingScreen = ({ onNav, ksUrl, phases = [], settings = {} }) => {
       <section className="hero">
         <div className="hero-side">
           <Eyebrow>{heroEyebrow}</Eyebrow>
-          <h1 className="h1">
-            {heroTitleLines.map((line, i) => (
-              <React.Fragment key={i}>
-                {i === heroTitleLines.length - 1 ? <span className="gold">{line}</span> : line}
-                {i < heroTitleLines.length - 1 && <br />}
-              </React.Fragment>
-            ))}
+          <h1 className="h1 hero-title-desktop">
+            {heroTitleNode}
           </h1>
           <p className="lore" style={{ fontSize: 17, maxWidth: 360, whiteSpace: "pre-line" }}>
             {heroLore}
@@ -62,6 +68,7 @@ export const LandingScreen = ({ onNav, ksUrl, phases = [], settings = {} }) => {
           <div className="tarot-frame">
             <ImageSlot id="hero-pinup" shape="rect" placeholder={t("HEROINE — drop hero render")} />
             <RuneRing />
+            <h1 className="h1 hero-title-overlay">{heroTitleNode}</h1>
           </div>
           {heroBanner && <div className="tarot-banner">{heroBanner}</div>}
         </div>

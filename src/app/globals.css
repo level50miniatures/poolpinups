@@ -530,6 +530,7 @@ image-slot {
   color: var(--ivory);
   flex: 0 0 auto;
 }
+.vote-meta > .eyebrow { font-size: 7.5px !important; letter-spacing: 0.28em; }
 .vote-meta .lore {
   font-size: 11px;
   line-height: 1.5;

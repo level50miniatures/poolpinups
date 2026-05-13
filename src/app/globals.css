@@ -531,15 +531,16 @@ image-slot {
   flex: 0 0 auto;
 }
 .vote-meta .lore {
-  font-size: 12.35px;
+  font-size: 11px;
+  line-height: 1.5;
   margin: 0 0 14px;
   flex: 1 1 auto;
   min-height: 0;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
-  line-clamp: 3;
+  line-clamp: 4;
 }
 .vote-meta > .eyebrow { flex: 0 0 auto; }
 .vote-meta > div:last-child { flex: 0 0 auto; margin-top: auto; }

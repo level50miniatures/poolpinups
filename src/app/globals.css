@@ -603,7 +603,6 @@ image-slot {
 
 @media (max-width: 880px) {
   .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
-  .vote-grid.grid-4 { grid-template-columns: 1fr 1fr; gap: 14px; }
   .app-nav { padding: 14px 20px; gap: 10px; }
   .app-nav .nav-inline { display: none; }
   .app-nav .nav-burger { display: block; }
@@ -677,27 +676,6 @@ image-slot {
     -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   }
 
-  /* Voting cards: shrink all fonts 50% so text fits in 2-column layout */
-  .vote-card .vote-meta { padding: 12px 12px 14px; }
-  .vote-card .vote-meta .eyebrow { font-size: 4.5px !important; margin-bottom: 3px !important; }
-  .vote-card .vote-meta h3 { font-size: 8.8px; margin: 0 0 3px; letter-spacing: 0.06em; }
-  .vote-card .vote-meta .lore { font-size: 6.2px; margin: 0 0 7px; line-height: 1.4; }
-  .vote-card .vote-meta .mono { font-size: 5.5px; }
-  /* Back face — frame uses inline padding:28 and lore uses inline maxWidth:240, both need !important */
-  .vote-card .vote-back .frame { padding: 12px !important; }
-  .vote-card .vote-back .eyebrow { font-size: 5px !important; margin-bottom: 4px !important; }
-  .vote-card .vote-back h3 { font-size: 11px !important; margin: 0 0 4px !important; letter-spacing: 0.05em !important; }
-  .vote-card .vote-back .lore { font-size: 6px !important; margin: 0 0 8px !important; max-width: none !important; line-height: 1.35 !important; }
-  .vote-card .vote-back .mono { font-size: 4.5px !important; margin-top: 6px !important; }
-  .vote-card .vote-back .frame > div:has(> .btn) { margin-top: 6px !important; }
-  .vote-card .vote-back .btn {
-    padding: 6px 14px !important;
-    font-size: 8px !important;
-    letter-spacing: 0.18em !important;
-    gap: 6px !important;
-    white-space: nowrap;
-  }
-  .vote-card .voted-badge { font-size: 7px; padding: 2px 5px; }
 }
 
 /* ── Dramatic countdown ───────────────────────────── */

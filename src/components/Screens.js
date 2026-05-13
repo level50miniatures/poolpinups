@@ -758,7 +758,7 @@ const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId }) =
 
       <Divider />
 
-      <div className="grid-4 vote-grid" style={{ marginTop: 30 }}>
+      <div className="grid-4" style={{ marginTop: 30 }}>
         {options.map(o => (
           <VoteCard
             key={o.id}

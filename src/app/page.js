@@ -1,16 +1,15 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { LandingScreen, LoginScreen, DashboardScreen, VotingScreen, ResultsScreen } from "../components/Screens";
 import { AppNav } from "../components/Components";
-import { getLang, setLang as setLangGlobal, t } from "../lib/i18n";
+import { t } from "../lib/i18n";
 import { getPhases, getSettings, getImageUrls } from "./actions/admin";
 import { getUserVotes } from "./actions/vote";
 import { ImageUrlProvider } from "../lib/imageUrlContext";
 
 export default function App() {
   const [screen, setScreen] = useState("landing");
-  const [lang, setLang] = useState("en");
   const [phases, setPhases] = useState([]);
   const [settings, setSettings] = useState({ kickstarterUrl: "#" });
   const [userEmail, setUserEmail] = useState("");
@@ -24,7 +23,6 @@ export default function App() {
     getImageUrls().then(setImageUrls);
     setUserEmail(sessionStorage.getItem("userEmail") || "");
     setUserId(sessionStorage.getItem("userId") || "");
-    setLang(getLang());
     const h = (window.location.hash || "").replace("#", "");
     if (["landing", "login", "dashboard", "voting", "results"].includes(h)) {
       setScreen(h);
@@ -43,11 +41,6 @@ export default function App() {
     window.location.hash = screen;
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [screen]);
-
-  const handleLang = useCallback((l) => {
-    setLangGlobal(l);
-    setLang(l);
-  }, []);
 
   const handleLogin = (email, id) => {
     setUserEmail(email);
@@ -70,8 +63,8 @@ export default function App() {
 
   return (
     <ImageUrlProvider value={imageUrls}>
-      <AppNav screen={screen} onNav={setScreen} lang={lang} onLang={handleLang} />
-      <div data-screen-label={`${["landing","login","dashboard","voting","results"].indexOf(screen) + 1} ${screen}`} key={lang}>
+      <AppNav screen={screen} onNav={setScreen} />
+      <div data-screen-label={`${["landing","login","dashboard","voting","results"].indexOf(screen) + 1} ${screen}`}>
         {screens[screen]}
       </div>
       <footer className="app-foot">{t("Pool Pinups · A community-forged fantasy reliquary · MMXXVI")}</footer>

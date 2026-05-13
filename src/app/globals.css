@@ -386,11 +386,6 @@ image-slot {
   display: flex;
   gap: 4px;
 }
-.app-nav .nav-inline .nav-lang {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
 .nav-drawer {
   display: none;
 }
@@ -654,14 +649,6 @@ image-slot {
     color: var(--gold-bright);
     border-color: var(--gold-faint);
     background: rgba(20, 16, 12, 0.6);
-  }
-  .nav-drawer .nav-lang {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 18px;
-    border-top: 1px solid var(--gold-faint);
   }
   .shell { padding: 36px 20px 80px; }
   .h1 { font-size: 38px; }

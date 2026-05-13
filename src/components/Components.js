@@ -2,7 +2,7 @@
 
 import React from "react";
 import { createPortal } from "react-dom";
-import { t, LangSwitcher } from "../lib/i18n";
+import { t } from "../lib/i18n";
 import { useImageUrl } from "../lib/imageUrlContext";
 
 export const Corners = () => (
@@ -195,7 +195,7 @@ export const SectionHead = ({ eyebrow, title, lore, align = "center" }) => (
   </div>
 );
 
-export const AppNav = ({ screen, onNav, lang, onLang }) => {
+export const AppNav = ({ screen, onNav }) => {
   const [open, setOpen] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
   const tabs = [
@@ -217,22 +217,17 @@ export const AppNav = ({ screen, onNav, lang, onLang }) => {
   const handleNav = (id) => { onNav(id); setOpen(false); };
 
   const navContent = (
-    <>
-      <div className="tabs">
-        {tabs.map(tb => (
-          <button
-            key={tb.id}
-            className={`tab ${screen === tb.id ? "active" : ""}`}
-            onClick={() => handleNav(tb.id)}
-          >
-            {tb.label}
-          </button>
-        ))}
-      </div>
-      <div className="nav-lang">
-        <LangSwitcher lang={lang} onChange={onLang} />
-      </div>
-    </>
+    <div className="tabs">
+      {tabs.map(tb => (
+        <button
+          key={tb.id}
+          className={`tab ${screen === tb.id ? "active" : ""}`}
+          onClick={() => handleNav(tb.id)}
+        >
+          {tb.label}
+        </button>
+      ))}
+    </div>
   );
 
   return (

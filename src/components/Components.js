@@ -62,6 +62,7 @@ export const ImageSlot = ({ id, label, placeholder, style, shape = "rect" }) => 
   const [error, setError] = React.useState(false);
   const registeredUrl = useImageUrl(id);
   const src = registeredUrl || `/images/${id}.png`;
+  React.useEffect(() => { setError(false); }, [src]);
   return (
     <div className={`art-frame shape-${shape}`} style={{ position: "relative", ...style }}>
       {!error ? (

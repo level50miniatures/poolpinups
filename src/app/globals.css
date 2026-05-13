@@ -790,7 +790,7 @@ image-slot {
 @media (max-width: 1080px) {
   .hero { grid-template-columns: 1fr; min-height: auto; }
   .hero .hero-side.right { text-align: left; align-items: flex-start; }
-  .hero .hero-tarot { max-width: 420px; }
+  .hero .hero-tarot { max-width: 420px; order: -1; }
 }
 
 /* ── Result reveal ─────────────────────────────────── */

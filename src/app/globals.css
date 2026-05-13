@@ -601,6 +601,7 @@ image-slot {
 
 @media (max-width: 880px) {
   .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
+  .vote-grid.grid-4 { grid-template-columns: 1fr 1fr; gap: 14px; }
   .app-nav { padding: 14px 20px; gap: 10px; }
   .app-nav .nav-inline { display: none; }
   .app-nav .nav-burger { display: block; }

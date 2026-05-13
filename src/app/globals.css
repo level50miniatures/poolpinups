@@ -681,10 +681,13 @@ image-slot {
   .vote-card .vote-meta h3 { font-size: 8.8px; margin: 0 0 3px; letter-spacing: 0.06em; }
   .vote-card .vote-meta .lore { font-size: 6.2px; margin: 0 0 7px; line-height: 1.4; }
   .vote-card .vote-meta .mono { font-size: 5.5px; }
-  .vote-card .vote-back .eyebrow { font-size: 5.5px; margin-bottom: 7px !important; }
-  .vote-card .vote-back h3 { font-size: 13px !important; margin: 0 0 5px !important; }
-  .vote-card .vote-back .lore { font-size: 6.5px !important; margin: 0 0 12px !important; }
-  .vote-card .vote-back .mono { font-size: 4.5px !important; margin-top: 8px !important; }
+  /* Back face — frame uses inline padding:28 and lore uses inline maxWidth:240, both need !important */
+  .vote-card .vote-back .frame { padding: 12px !important; }
+  .vote-card .vote-back .eyebrow { font-size: 5px !important; margin-bottom: 4px !important; }
+  .vote-card .vote-back h3 { font-size: 11px !important; margin: 0 0 4px !important; letter-spacing: 0.05em !important; }
+  .vote-card .vote-back .lore { font-size: 6px !important; margin: 0 0 8px !important; max-width: none !important; line-height: 1.35 !important; }
+  .vote-card .vote-back .mono { font-size: 4.5px !important; margin-top: 6px !important; }
+  .vote-card .vote-back .frame > div:has(> .btn) { margin-top: 6px !important; }
   .vote-card .voted-badge { font-size: 7px; padding: 2px 5px; }
 }
 

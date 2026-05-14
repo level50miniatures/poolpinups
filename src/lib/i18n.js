@@ -113,7 +113,7 @@ export const TRANSLATIONS = {
     "STEP 2 OF 2 — PASTE THE TOKEN HERE": "PASO 2 DE 2 — PEGA EL TOKEN AQUÍ",
     "We sent an email to:": "Hemos enviado un correo a:",
     "Subject:": "Asunto:",
-    "Your access token to Pool Pinups": "Tu token de acceso a Pool Pinups",
+    "Your access token to Pinup Forge": "Tu token de acceso a Pinup Forge",
     "Inside the email you will find a code like:": "Dentro del correo encontrarás un código como:",
     "Copy that code and paste it below.": "Copia ese código y pégalo abajo.",
     "Paste your token here": "Pega aquí tu token",
@@ -244,8 +244,8 @@ export const TRANSLATIONS = {
     "Seconds": "Segundos",
 
     // Footer
-    "Pool Pinups · A community-forged fantasy reliquary · MMXXVI":
-      "Pool Pinups · Un relicario de fantasía forjado por la comunidad · MMXXVI",
+    "Pinup Forge · A community-forged fantasy reliquary · MMXXVI":
+      "Pinup Forge · Un relicario de fantasía forjado por la comunidad · MMXXVI",
 
     // Tweaks
     "Tweaks": "Ajustes",

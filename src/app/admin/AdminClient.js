@@ -174,7 +174,7 @@ export default function AdminClient({ initialPhases, initialSettings, initialIma
     const lines = [];
     const now = new Date();
 
-    lines.push(`# Pool Pinups — Estado del Concilio`);
+    lines.push(`# Pinup Forge — Estado del Concilio`);
     lines.push(``);
     lines.push(`Generado: ${now.toLocaleString()}`);
     lines.push(``);
@@ -629,7 +629,7 @@ export default function AdminClient({ initialPhases, initialSettings, initialIma
               <h3 className="font-bold text-purple-900">Plantilla de Skill para Claude</h3>
               <button 
                 onClick={() => {
-                  navigator.clipboard.writeText(`Actúa como mi asistente de creación de contenido para Pool Pinups. Mi objetivo es crear una carpeta de importación masiva. 
+                  navigator.clipboard.writeText(`Actúa como mi asistente de creación de contenido para Pinup Forge. Mi objetivo es crear una carpeta de importación masiva. 
 Cuando te dé ideas, descripciones o nombres para nuevas Fases y Opciones de votación, tu trabajo es generar un bloque de código en formato JSON estrictamente válido que yo guardaré en un archivo llamado pools.json.
 
 La estructura obligatoria del JSON debe ser esta:
@@ -669,7 +669,7 @@ Reglas importantes:
               Copia este texto y dáselo a Claude. Él te devolverá el código que debes guardar en un archivo llamado <strong>pools.json</strong> junto a tus imágenes.
             </p>
             <pre className="text-[10px] bg-white p-3 border border-purple-100 rounded text-purple-900 overflow-x-auto whitespace-pre-wrap">
-{`Actúa como mi asistente de creación de contenido para Pool Pinups. Mi objetivo es crear una carpeta de importación masiva. 
+{`Actúa como mi asistente de creación de contenido para Pinup Forge. Mi objetivo es crear una carpeta de importación masiva. 
 Cuando te dé ideas, descripciones o nombres para nuevas Fases y Opciones de votación, tu trabajo es generar un bloque de código en formato JSON estrictamente válido que yo guardaré en un archivo llamado pools.json.
 
 La estructura obligatoria del JSON debe ser esta:

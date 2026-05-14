@@ -67,7 +67,7 @@ export default function App() {
       <div data-screen-label={`${["landing","login","dashboard","voting","results"].indexOf(screen) + 1} ${screen}`}>
         {screens[screen]}
       </div>
-      <footer className="app-foot">{t("Pool Pinups · A community-forged fantasy reliquary · MMXXVI")}</footer>
+      <footer className="app-foot">{t("Pinup Forge · A community-forged fantasy reliquary · MMXXVI")}</footer>
     </ImageUrlProvider>
   );
 }

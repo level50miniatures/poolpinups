@@ -2,7 +2,7 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata = {
-  title: "Pool Pinups — Forge the Next Heroine",
+  title: "Pinup Forge — Forge the Next Heroine",
   description: "Backers of the realm summon the next fantasy pinup, vote by vote.",
 };
 

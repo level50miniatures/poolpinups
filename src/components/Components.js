@@ -238,7 +238,7 @@ export const AppNav = ({ screen, onNav }) => {
           <div className="brand-logo" title={t("Drop your company logo here")}>
             <ImageSlot id="brand-logo" shape="rect" placeholder="LOGO" />
           </div>
-          <span>Pool Pinups</span>
+          <span>Pinup Forge</span>
         </div>
         <div className="nav-inline">{navContent}</div>
         <button

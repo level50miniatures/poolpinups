@@ -650,7 +650,7 @@ image-slot {
     border-color: var(--gold-faint);
     background: rgba(20, 16, 12, 0.6);
   }
-  .shell { padding: 36px 20px 80px; }
+  .shell { padding: 16px 20px 80px; }
   .h1 { font-size: 38px; }
   .stat-num { font-size: 28px; }
 
@@ -774,11 +774,12 @@ image-slot {
 }
 
 @media (max-width: 880px) {
+  .hero { padding: 8px 0 24px; }
   .hero .hero-title-desktop { display: none; }
   .hero .hero-title-mobile {
     display: block;
     text-align: center;
-    margin: 0 0 24px;
+    margin: 0 0 18px;
   }
   .hero .hero-tarot { aspect-ratio: auto; }
   .hero .tarot-frame { aspect-ratio: 3 / 5; }

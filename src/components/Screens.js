@@ -65,10 +65,10 @@ export const LandingScreen = ({ onNav, ksUrl, phases = [], settings = {} }) => {
         </div>
 
         <div className="hero-tarot">
+          <h1 className="h1 hero-title-mobile">{heroTitleNode}</h1>
           <div className="tarot-frame">
             <ImageSlot id="hero-pinup" shape="rect" placeholder={t("HEROINE — drop hero render")} />
             <RuneRing />
-            <h1 className="h1 hero-title-overlay">{heroTitleNode}</h1>
           </div>
           {heroBanner && <div className="tarot-banner">{heroBanner}</div>}
         </div>

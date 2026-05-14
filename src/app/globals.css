@@ -764,8 +764,8 @@ image-slot {
 }
 .hero .hero-side.right { text-align: right; align-items: flex-end; }
 
-/* Title overlay: hidden on desktop, only shown on mobile inside the tarot frame */
-.hero .hero-title-overlay { display: none; }
+/* Title duplicate for mobile: hidden on desktop, shown above the tarot image on mobile */
+.hero .hero-title-mobile { display: none; }
 
 @media (max-width: 1080px) {
   .hero { grid-template-columns: 1fr; min-height: auto; }
@@ -775,22 +775,13 @@ image-slot {
 
 @media (max-width: 880px) {
   .hero .hero-title-desktop { display: none; }
-  .hero .tarot-frame { position: relative; }
-  .hero .hero-title-overlay {
+  .hero .hero-title-mobile {
     display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 92%;
-    margin: 0;
     text-align: center;
-    z-index: 3;
-    pointer-events: none;
-    text-shadow:
-      0 2px 16px rgba(0, 0, 0, 0.9),
-      0 0 30px rgba(0, 0, 0, 0.7);
+    margin: 0 0 24px;
   }
+  .hero .hero-tarot { aspect-ratio: auto; }
+  .hero .tarot-frame { aspect-ratio: 3 / 5; }
 }
 
 /* ── Result reveal ─────────────────────────────────── */

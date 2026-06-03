@@ -592,7 +592,7 @@ export const DashboardScreen = ({ onNav, userEmail, activePhases = [], phases = 
 
 import { castVote } from "../app/actions/vote";
 
-const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId }) => {
+const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId, onVoted }) => {
   const [flippedId, setFlippedId] = React.useState(null);
   const [confirmed, setConfirmed] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -616,16 +616,19 @@ const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId }) =
       return;
     }
     const audio = new Audio(flipSoundUrl);
-    audio.volume = 0.6;
     audio.preload = "auto";
+    audio.load();
     flipAudioRef.current = audio;
   }, [flipSoundUrl]);
 
   const playFlipSound = () => {
-    const audio = flipAudioRef.current;
-    if (!audio) return;
+    const base = flipAudioRef.current;
+    if (!base) return;
     try {
-      audio.currentTime = 0;
+      // Play a fresh clone so rapid flips overlap and we never touch
+      // currentTime on a still-loading element (which throws and swallows play).
+      const audio = base.cloneNode();
+      audio.volume = 0.6;
       audio.play().catch(() => {});
     } catch {}
   };
@@ -656,6 +659,7 @@ const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId }) =
         }
         setLocalVote(option.id);
         setConfirmed(option.id);
+        if (onVoted) onVoted();
       } catch (e) {
         alert("Error: " + e.message);
       }
@@ -812,7 +816,7 @@ const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId }) =
   );
 };
 
-export const VotingScreen = ({ onNav, activePhases = [], userId, flipSoundUrl, userVotes = {} }) => {
+export const VotingScreen = ({ onNav, activePhases = [], userId, flipSoundUrl, userVotes = {}, onVoted }) => {
   if (!activePhases.length) {
     return (
       <div className="screen active">
@@ -835,6 +839,7 @@ export const VotingScreen = ({ onNav, activePhases = [], userId, flipSoundUrl, u
               onNav={onNav}
               flipSoundUrl={flipSoundUrl}
               votedOptionId={userVotes[phase.id] || null}
+              onVoted={onVoted}
             />
             {idx < activePhases.length - 1 && <Divider />}
           </React.Fragment>

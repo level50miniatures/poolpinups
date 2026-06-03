@@ -29,13 +29,17 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => {
+  const refreshUserVotes = React.useCallback(() => {
     if (userId) {
       getUserVotes(userId).then(setUserVotes);
     } else {
       setUserVotes({});
     }
   }, [userId]);
+
+  useEffect(() => {
+    refreshUserVotes();
+  }, [refreshUserVotes]);
   
   useEffect(() => {
     window.location.hash = screen;
@@ -57,7 +61,7 @@ export default function App() {
     landing: <LandingScreen onNav={setScreen} ksUrl={ksUrl} phases={phases} settings={settings} />,
     login: <LoginScreen onNav={setScreen} onLogin={handleLogin} />,
     dashboard: <DashboardScreen onNav={setScreen} userEmail={userEmail} activePhases={activePhases} phases={phases} userVotes={userVotes} />,
-    voting: <VotingScreen onNav={setScreen} activePhases={activePhases} userId={userId} flipSoundUrl={flipSoundUrl} userVotes={userVotes} />,
+    voting: <VotingScreen onNav={setScreen} activePhases={activePhases} userId={userId} flipSoundUrl={flipSoundUrl} userVotes={userVotes} onVoted={refreshUserVotes} />,
     results: <ResultsScreen onNav={setScreen} phases={phases} />,
   };
 

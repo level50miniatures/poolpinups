@@ -53,6 +53,16 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [screen]);
 
+  // Live-ish tallies: poll the phase counts every 10s while on a screen that
+  // shows vote counts, so other people's votes appear without a manual refresh.
+  useEffect(() => {
+    if (!["voting", "dashboard", "results"].includes(screen)) return;
+    const id = setInterval(() => {
+      getPhases().then(setPhases);
+    }, 10000);
+    return () => clearInterval(id);
+  }, [screen]);
+
   const handleLogin = (email, id) => {
     setUserEmail(email);
     setUserId(id);

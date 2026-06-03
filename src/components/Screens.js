@@ -605,6 +605,13 @@ const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId, onV
     setLocalVote(votedOptionId);
   }, [votedOptionId]);
 
+  // When fresh server tallies arrive, drop the optimistic bumps so we don't
+  // double-count on top of the real counts.
+  const tallySignature = (phase.options || []).map(o => o.tally || 0).join(",");
+  React.useEffect(() => {
+    setTallyBumps({});
+  }, [tallySignature]);
+
   React.useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);

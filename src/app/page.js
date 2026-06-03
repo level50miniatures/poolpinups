@@ -40,6 +40,13 @@ export default function App() {
   useEffect(() => {
     refreshUserVotes();
   }, [refreshUserVotes]);
+
+  // After a vote, re-fetch both the live tallies and the user's votes so the
+  // Live Tally and the green "voted" card stay in sync with the server.
+  const handleVoted = React.useCallback(() => {
+    getPhases().then(setPhases);
+    refreshUserVotes();
+  }, [refreshUserVotes]);
   
   useEffect(() => {
     window.location.hash = screen;
@@ -61,7 +68,7 @@ export default function App() {
     landing: <LandingScreen onNav={setScreen} ksUrl={ksUrl} phases={phases} settings={settings} />,
     login: <LoginScreen onNav={setScreen} onLogin={handleLogin} />,
     dashboard: <DashboardScreen onNav={setScreen} userEmail={userEmail} activePhases={activePhases} phases={phases} userVotes={userVotes} />,
-    voting: <VotingScreen onNav={setScreen} activePhases={activePhases} userId={userId} flipSoundUrl={flipSoundUrl} userVotes={userVotes} onVoted={refreshUserVotes} />,
+    voting: <VotingScreen onNav={setScreen} activePhases={activePhases} userId={userId} flipSoundUrl={flipSoundUrl} userVotes={userVotes} onVoted={handleVoted} />,
     results: <ResultsScreen onNav={setScreen} phases={phases} />,
   };
 

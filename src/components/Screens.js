@@ -594,7 +594,6 @@ import { castVote } from "../app/actions/vote";
 
 const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId, onVoted }) => {
   const [flippedId, setFlippedId] = React.useState(null);
-  const [confirmed, setConfirmed] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [now, setNow] = React.useState(() => Date.now());
   const [localVote, setLocalVote] = React.useState(votedOptionId);
@@ -665,7 +664,7 @@ const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId, onV
           });
         }
         setLocalVote(option.id);
-        setConfirmed(option.id);
+        setFlippedId(null);
         if (onVoted) onVoted();
       } catch (e) {
         alert("Error: " + e.message);
@@ -691,48 +690,6 @@ const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId, onV
           {t("This pool is sealed. Voting has ended.")}
         </p>
         <Btn primary onClick={() => onNav("results")}>{t("View Results →")}</Btn>
-      </div>
-    );
-  }
-
-  if (confirmed) {
-    const winner = options.find(o => o.id === confirmed);
-    return (
-      <div style={{ paddingTop: 40, paddingBottom: 40, textAlign: "center" }}>
-        <div className="reveal">
-          <div style={{ display: "inline-flex", marginBottom: 26 }} className="pulse-glow">
-            <Sigil size={56} />
-          </div>
-          <Eyebrow>{t("Vote Sealed")} · {phase.title}</Eyebrow>
-          <h2 className="h2" style={{ margin: "16px 0 18px" }}>{t("Your voice shapes")}<br/>{t("the next heroine.")}</h2>
-          <p className="lore" style={{ fontSize: 17 }}>{t("You bound your name to")} <span className="gold">{t(winner.title)}</span>{t(". The council has heard. Return when the moon turns.")}</p>
-
-          <Frame className="deep" style={{ padding: 28, margin: "32px auto 0", maxWidth: 420 }}>
-            <Eyebrow>{phase.title} · {t("Live Tally")}</Eyebrow>
-            <div className="mono" style={{ color: "var(--muted)", fontSize: 9, marginTop: 4 }}>{displayTotal.toLocaleString()} {t("voices cast")}</div>
-            <div style={{ marginTop: 16 }}>
-              {[...options]
-                .sort((a, b) => getDisplayTally(b) - getDisplayTally(a))
-                .map(opt => {
-                  const tally = getDisplayTally(opt);
-                  const pct = displayTotal > 0 ? Math.round((tally / displayTotal) * 100) : 0;
-                  return (
-                    <BarRow
-                      key={opt.id}
-                      label={`${opt.title} · ${tally}`}
-                      pct={pct}
-                      winner={confirmed === opt.id}
-                    />
-                  );
-                })}
-            </div>
-          </Frame>
-
-          <div style={{ marginTop: 36, display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <Btn ghost onClick={() => { setConfirmed(null); setFlippedId(null); }}>{t("Recast (until moon)")}</Btn>
-            <Btn primary onClick={() => onNav("results")}>{t("View Results →")}</Btn>
-          </div>
-        </div>
       </div>
     );
   }

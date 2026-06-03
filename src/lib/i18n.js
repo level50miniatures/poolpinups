@@ -207,6 +207,7 @@ export const TRANSLATIONS = {
     ". The council has heard. Return when the moon turns.": ". El concilio ha oído. Vuelve cuando la luna gire.",
     "Phase II · Live Tally": "Fase II · Conteo en Vivo",
     "Recast (until moon)": "Re-votar (hasta la luna)",
+    "Withdraw vote": "Retirar voto",
     "View Results →": "Ver Resultados →",
 
     // Results

@@ -40,3 +40,24 @@ export async function castVote(userId, phaseId, optionId) {
   revalidatePath('/');
   return { success: true };
 }
+
+export async function removeVote(userId, phaseId) {
+  if (!userId) throw new Error("Debes iniciar sesión para retirar tu voto.");
+
+  const phase = await prisma.phase.findUnique({ where: { id: phaseId } });
+  if (!phase) throw new Error("Fase no encontrada.");
+  if (phase.status !== "ACTIVE") throw new Error("Esta fase ya no está abierta a votación.");
+  if (phase.closesAt && new Date() >= phase.closesAt) {
+    throw new Error("El tiempo de esta votación ha terminado.");
+  }
+
+  await prisma.vote.deleteMany({
+    where: {
+      userId,
+      phaseId
+    }
+  });
+
+  revalidatePath('/');
+  return { success: true };
+}

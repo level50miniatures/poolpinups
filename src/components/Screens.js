@@ -590,7 +590,7 @@ export const DashboardScreen = ({ onNav, userEmail, activePhases = [], phases = 
   );
 };
 
-import { castVote } from "../app/actions/vote";
+import { castVote, removeVote } from "../app/actions/vote";
 
 const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId, onVoted }) => {
   const [flippedId, setFlippedId] = React.useState(null);
@@ -676,6 +676,22 @@ const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId, onV
     setFlippedId(prev => prev === option.id ? null : option.id);
   };
 
+  const handleRemoveVote = async () => {
+    if (isExpired || !localVote || loading) return;
+    setLoading(true);
+    try {
+      await removeVote(userId, phase.id);
+      const prevLocal = localVote;
+      setTallyBumps(prev => ({ ...prev, [prevLocal]: (prev[prevLocal] || 0) - 1 }));
+      setLocalVote(null);
+      setFlippedId(null);
+      if (onVoted) onVoted();
+    } catch (e) {
+      alert("Error: " + e.message);
+    }
+    setLoading(false);
+  };
+
   const getDisplayTally = (opt) => Math.max(0, (opt.tally || 0) + (tallyBumps[opt.id] || 0));
   const displayTotal = options.reduce((s, o) => s + getDisplayTally(o), 0);
 
@@ -727,6 +743,26 @@ const PhaseVoteBlock = ({ phase, userId, onNav, flipSoundUrl, votedOptionId, onV
               <span className="mono" style={{ color: "#4ade80", fontSize: 10, letterSpacing: "0.2em" }}>✓ {t("YOUR SEALED VOTE")}</span>
               <span className="mono" style={{ color: "var(--gold)", letterSpacing: "0.1em" }}>{votedOpt.title}</span>
             </span>
+            <div style={{ marginTop: 14 }}>
+              <button
+                type="button"
+                onClick={handleRemoveVote}
+                disabled={loading}
+                className="mono"
+                style={{
+                  background: "transparent",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  color: "var(--muted)",
+                  padding: "8px 16px",
+                  fontSize: 9,
+                  letterSpacing: "0.2em",
+                  cursor: loading ? "default" : "pointer",
+                  opacity: loading ? 0.5 : 1,
+                }}
+              >
+                {t("Withdraw vote")}
+              </button>
+            </div>
           </div>
         );
       })()}
